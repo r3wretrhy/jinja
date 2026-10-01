@@ -189,6 +189,16 @@ class TestFilter:
         t = env.from_string("{{ 'jinja\nflask'|indent(width='>>> ', first=True) }}")
         assert t.render() == ">>> jinja\n>>> flask"
 
+    def test_indent_empty_first(self, env):
+        """Empty input with first=True must not become only indentation (#2176)."""
+        t = env.from_string("{% filter indent(4, first=True) %}{% endfilter %}")
+        assert t.render() == ""
+        t = env.from_string("{{ ''|indent(4, true, false) }}")
+        assert t.render() == ""
+        # Completely empty input has no lines to indent, even with blank=True
+        t = env.from_string("{{ ''|indent(4, true, true) }}")
+        assert t.render() == ""
+
     @pytest.mark.parametrize(
         ("value", "expect"),
         (

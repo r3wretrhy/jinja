@@ -860,7 +860,10 @@ def do_indent(
                 indention + line if line else line for line in lines
             )
 
-    if first:
+    if first and rv:
+        # Skip indenting a completely empty value when first=True.
+        # blank=False already leaves empty *subsequent* lines unindented;
+        # without this guard an empty input became only indentation (#2176).
         rv = indention + rv
 
     return rv
