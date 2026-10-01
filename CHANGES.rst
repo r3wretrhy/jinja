@@ -5,6 +5,8 @@ Version 3.2.0
 
 Unreleased
 
+-   The ``|indent`` filter does not indent empty values when ``first=True``.
+    :issue:`2176`
 -   Drop support for Python 3.7, 3.8, and 3.9.
 -   Update minimum MarkupSafe version to >= 3.0.
 -   Update minimum Babel version to >= 2.17.
